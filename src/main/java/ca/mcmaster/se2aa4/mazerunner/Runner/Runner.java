@@ -4,9 +4,21 @@ import ca.mcmaster.se2aa4.mazerunner.Navigation.Direction;
 import ca.mcmaster.se2aa4.mazerunner.Navigation.Location;
 
 public class Runner {
+    private static Runner instance;
     private Location location;
     private Direction direction;
 
+    private Runner() {
+        // Private Constructor to Implement Singleton Pattern
+    }
+
+    public static Runner getInstance() {
+        if (instance == null) {
+            instance = new Runner();
+        }
+        return instance;
+    }
+    
     public void setLocation(Location location) {
         this.location = location;
     }

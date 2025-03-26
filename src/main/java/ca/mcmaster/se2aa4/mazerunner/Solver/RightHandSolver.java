@@ -17,7 +17,7 @@ public class RightHandSolver implements Solver {
     @Override
     public String solve(Maze maze) {
         Location endLocation = maze.getEndLocation();
-        Runner runner = new Runner();
+        Runner runner = Runner.getInstance();
         runner.setLocation(maze.getStartLocation());
         runner.setDirection(Direction.RIGHT);
         
