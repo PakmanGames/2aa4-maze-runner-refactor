@@ -12,6 +12,7 @@ in unexpected ways, unit tests will help you notice those breaking parts and hel
 
 #### Observer Pattern
 - Runner, only move when state change from the solver
+- Path is subject, PathObserver class "has a" runner maybe, update runner on Path change (reads new character)
 
 #### Factory Pattern
 - Maze builder class, created tiles and Maze object
