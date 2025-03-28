@@ -48,4 +48,16 @@ public class Location {
                 return null;
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Location location = (Location) obj;
+        return this.row == location.getRow() && this.column == location.getColumn();
+    }
 }
