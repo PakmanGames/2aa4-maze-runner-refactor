@@ -51,11 +51,12 @@ public class FactorizedPath extends Path {
 
     @Override
     public String toString() {
+        StringBuilder result = new StringBuilder();
         if (this.count > 1) {
-            this.path.append(this.count).append(this.lastDirection);
+            result.append(this.count).append(this.lastDirection);
         } else {
-            this.path.append(this.lastDirection);
+            result.append(this.lastDirection);
         }
-        return this.path.toString().trim();
+        return result.toString().trim();
     }
 }
