@@ -29,4 +29,13 @@ public class PathConversionTest {
         String canonicalP = CanonicalPath.convertToCanonical(p.toString());
         assertEquals("FFFF", canonicalP.toString());
     }
+
+    @Test
+    public void testLongPathConversion() {
+        String factorizedPath = "F R F 2L 2F R 2F R 2F 2L 4F R 2F R 4F 2L 2F R 4F R 2F R 2F 2L 2F L 2F L 4F R 2F R 2F 2L 4F R 2F R 2F 2L 2F R 2F R 4F R 2F L 2F R 2F L F";
+        String expectedOutput = "F R F LL FF R FF R FF LL FFFF R FF R FFFF LL FF R FFFF R FF R FF LL FF L FF L FFFF R FF R FF LL FFFF R FF R FF LL FF R FF R FFFF R FF L FF R FF L F";
+
+        String canonicalPath = CanonicalPath.convertToCanonical(factorizedPath);
+        assertEquals(expectedOutput, canonicalPath);
+    }
 }
