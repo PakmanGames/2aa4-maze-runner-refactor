@@ -5,7 +5,11 @@ import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MazeReader {
+    private static final Logger logger = LogManager.getLogger();
     public static Maze readMaze(String filename) {
         Maze maze = new Maze();
         try {
@@ -22,6 +26,10 @@ public class MazeReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        logger.info("Maze Start is at " + maze.getStartLocation());
+        logger.info("Maze End is at " + maze.getEndLocation());
+        logger.info("Maze Columns: " + maze.getColumnCount());
+        logger.info("Maze Rows: " + maze.getRowCount());
         return maze;
     }
 }
