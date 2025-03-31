@@ -11,7 +11,7 @@ import ca.mcmaster.se2aa4.mazerunner.Runner.Runner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class RightHandSolver implements Solver {
+public class RightHandSolver extends Subject implements Solver {
     private static final Logger logger = LogManager.getLogger();
 
     // Observer list and attach, detach methods here:
@@ -21,7 +21,8 @@ public class RightHandSolver implements Solver {
     @Override
     public String solve(Maze maze) {
         Location endLocation = maze.getEndLocation();
-        Runner runner = Runner.getInstance();
+        Runner runner = Runner.getInstance(this);
+        this.attach(runner);
         runner.setLocation(maze.getStartLocation());
         runner.setDirection(Direction.RIGHT);
         
@@ -42,23 +43,9 @@ public class RightHandSolver implements Solver {
             boolean frontWall = !maze.getTile(forwardLocation).isWalkable();
             boolean rightWall = !maze.getTile(rightLocation).isWalkable();
 
-            // Update the runner direction and path
-            if (!rightWall) {
-                runner.turnRight();
-                path.add('R');
-            } else if (frontWall) {
-                if (leftWall) {
-                    runner.turnRight();
-                    runner.turnRight();
-                    path.add('R');
-                    path.add('R');
-                } else {
-                    runner.turnLeft();
-                    path.add('L');
-                }
-            }
-            path.add('F');
-            runner.move();
+            // Notify observers with the wall information
+            logger.info("Right Wall: {}, Front Wall: {}, Left Wall: {}", rightWall, frontWall, leftWall);
+            notifyObservers(rightWall, frontWall, leftWall, path);
         }
         return FactorizedPath.convertToFactorized(CanonicalPath.convertToCanonical(path.toString()));
     }
