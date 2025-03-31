@@ -14,6 +14,10 @@ import org.apache.logging.log4j.Logger;
 public class RightHandSolver implements Solver {
     private static final Logger logger = LogManager.getLogger();
 
+    // Observer list and attach, detach methods here:
+
+    // Notify Observers method here:
+
     @Override
     public String solve(Maze maze) {
         Location endLocation = maze.getEndLocation();
@@ -28,14 +32,17 @@ public class RightHandSolver implements Solver {
             Location currentLocation = runner.getLocation();
             Direction currentDirection = runner.getDirection();
 
+            // Check the tiles in the right, front, and left directions
             Location leftLocation = currentLocation.move(currentDirection.turnLeft());
             Location rightLocation = currentLocation.move(currentDirection.turnRight());
             Location forwardLocation = currentLocation.move(currentDirection);
 
+            // Check if the tiles are walkable
             boolean leftWall = !maze.getTile(leftLocation).isWalkable();
             boolean frontWall = !maze.getTile(forwardLocation).isWalkable();
             boolean rightWall = !maze.getTile(rightLocation).isWalkable();
 
+            // Update the runner direction and path
             if (!rightWall) {
                 runner.turnRight();
                 path.add('R');
