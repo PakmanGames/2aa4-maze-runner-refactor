@@ -1,9 +1,8 @@
-package ca.mcmaster.se2aa4.mazerunner.Solver;
+package ca.mcmaster.se2aa4.mazerunner.Path;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 import ca.mcmaster.se2aa4.mazerunner.Runner.Observer;
 
 public abstract class Subject {
@@ -17,9 +16,9 @@ public abstract class Subject {
         observers.remove(observer);
     }
 
-    public void notifyObservers(boolean rightWall, boolean frontWall, boolean leftWall, Path path) {
+    public void notifyObservers(char direction) {
         for (Observer observer : observers) {
-            observer.update(rightWall, frontWall, leftWall, path);
+            observer.update(direction);
         }
     }
 }

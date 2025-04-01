@@ -1,7 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner.Runner;
 
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
-import ca.mcmaster.se2aa4.mazerunner.Solver.Subject;
+import ca.mcmaster.se2aa4.mazerunner.Path.Subject;
 
 public abstract class Observer {
     protected Subject subject;
@@ -11,5 +11,5 @@ public abstract class Observer {
         subject.attach(this);
     }
 
-    public abstract void update(boolean rightWall, boolean frontWall, boolean leftWall, Path path);
+    public abstract void update(char Direction);
 }
