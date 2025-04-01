@@ -29,6 +29,7 @@ public class FactorizedPath extends Path {
                 this.count = 1;
             }
         }
+        this.notifyObservers(direction);
     }
 
     public static String convertToFactorized(String canonicalPath) {

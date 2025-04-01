@@ -18,6 +18,7 @@ public class CanonicalPath extends Path {
                 this.path.append(direction);
             }
         }
+        this.notifyObservers(direction);
     }
 
     public static String convertToCanonical(String factorizedPath) {

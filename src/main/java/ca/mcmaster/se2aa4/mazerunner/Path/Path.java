@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner.Path;
 
-public class Path {
+public class Path extends Subject {
     StringBuilder path;
 
     public Path() {
@@ -9,6 +9,7 @@ public class Path {
 
     public void add(char direction) {
         this.path.append(direction);
+        this.notifyObservers(direction);
     }
 
     @Override

@@ -5,18 +5,21 @@ import ca.mcmaster.se2aa4.mazerunner.Navigation.Location;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 import ca.mcmaster.se2aa4.mazerunner.Path.Subject;
 
-public class Runner {
+public class Runner extends Observer {
     private static Runner instance;
     private Location location;
     private Direction direction;
 
-    private Runner() {
-        // super(subject);
+    private Runner(Subject subject) {
+        super(subject);
     }
 
-    public static Runner getInstance() {
+    public static Runner getInstance(Subject subject) {
         if (instance == null) {
-            instance = new Runner();
+            instance = new Runner(subject);
+        } else {
+            instance.subject = subject;
+            subject.attach(instance);
         }
         return instance;
     }
@@ -47,5 +50,16 @@ public class Runner {
 
     public void move() {
         this.location = this.location.move(this.direction);
+    }
+
+    @Override
+    public void update(char direction) {
+        if (direction == 'L') {
+            this.turnLeft();
+        } else if (direction == 'R') {
+            this.turnRight();
+        } else if (direction == 'F') {
+            this.move();
+        }
     }
 }

@@ -17,12 +17,10 @@ public class RightHandSolver implements Solver {
     @Override
     public String solve(Maze maze) {
         Location endLocation = maze.getEndLocation();
-        Runner runner = Runner.getInstance();
+        Path path = new FactorizedPath();
+        Runner runner = Runner.getInstance(path);
         runner.setLocation(maze.getStartLocation());
         runner.setDirection(Direction.RIGHT);
-        
-
-        Path path = new FactorizedPath();
 
         while (!runner.getLocation().equals(endLocation)) {
             Location currentLocation = runner.getLocation();
@@ -39,21 +37,16 @@ public class RightHandSolver implements Solver {
             boolean rightWall = !maze.getTile(rightLocation).isWalkable();
 
             if (!rightWall) {
-                runner.turnRight();
                 path.add('R');
             } else if (frontWall) {
                 if (leftWall) {
-                    runner.turnRight();
-                    runner.turnRight();
                     path.add('R');
                     path.add('R');
                 } else {
-                    runner.turnLeft();
                     path.add('L');
                 }
             }
             path.add('F');
-            runner.move();
         }
         return FactorizedPath.convertToFactorized(CanonicalPath.convertToCanonical(path.toString()));
     }
